@@ -165,7 +165,7 @@ public class Main extends Application {
         // set button action
 //        List P1Win = new ArrayList<>();
 
-//        button.setOnAction(new buttonHandler(number));
+
         gameBoard.setMinSize(300,300);
 
         GridPane gameScore = new GridPane();
