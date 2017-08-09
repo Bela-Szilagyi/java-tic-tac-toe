@@ -26,6 +26,10 @@ public class Main extends Application {
 
     Player playerX = new Player("Player", 0);
     Player playerO = new Player("Player", 0);
+    Tie tie = new Tie(0);
+    Label tieLabel = new Label();
+    Label player1Label = new Label();
+    Label player2Label = new Label();
 
     class buttonActionHandler implements EventHandler<ActionEvent> {
 
@@ -54,12 +58,18 @@ public class Main extends Application {
                 if (win) {
                     if (mark.equals("X")) {
                         name = playerX.getPlayerName();
+                        playerX.setPlayerScore(playerX.getPlayerScore() + 1);
+                        player1Label.setText(name +" X: "+ playerX.getPlayerScore());
                     } else {
                         name = playerO.getPlayerName();
+                        playerO.setPlayerScore(playerO.getPlayerScore() + 1);
+                        player2Label.setText(name +" X: "+ playerO.getPlayerScore());
                     }
                     alertGameOver(win, name);
                 } else if (round_counter == 9) {
                     alertGameOver(win, name);
+                    tie.setTieScore(tie.getTieScore() + 1);
+                    tieLabel.setText("Tie: "+ tie.getTieScore());
                 }
             }
             round_counter++;
@@ -120,7 +130,6 @@ public class Main extends Application {
         if (inputO.isPresent()) {
             playerO.setPlayerName(inputO.get());
         }
-        Tie tie = new Tie(0);
 
         round_counter = 1;
 
@@ -175,17 +184,14 @@ public class Main extends Application {
         String playerXName = playerX.getPlayerName();
         int playerXScore = playerX.getPlayerScore();
 
-        Label player1Label = new Label();
         player1Label.setMinSize(100, 24);
         player1Label.setAlignment(Pos.CENTER);
         player1Label.setText(playerXName+" X: "+playerXScore);
 
-        Label player2Label = new Label();
         player2Label.setMinSize(100, 24);
         player2Label.setAlignment(Pos.CENTER);
         player2Label.setText(playerO.getPlayerName() +" O: " + playerO.getPlayerScore());
 
-        Label tieLabel = new Label();
         tieLabel.setMinSize(100, 24);
         tieLabel.setAlignment(Pos.CENTER);
         tieLabel.setText("Tie: "+ tie.getTieScore());
